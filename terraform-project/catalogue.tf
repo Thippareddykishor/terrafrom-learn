@@ -16,7 +16,7 @@ resource "aws_instance" "catalogue" {
       host = self.public_ip
     }
     inline = [ "pip3 install ansible",
-    "ansible-pull -i loclahost, -u https://github.com/raghudevopsb83/roboshell -e component_name=catalogue" ]
+    "ansible-pull -i loclahost, -u https://github.com/raghudevopsb83/roboshop-ansible -e component_name=catalogue" ]
   }
 }
 

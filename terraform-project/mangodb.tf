@@ -15,7 +15,7 @@ resource "aws_instance" "mangodb" {
       host = self.public_ip
     }
     inline = [ "pip3 install ansible",
-    "ansible-pull -i loclahost, -u https://github.com/raghudevopsb83/roboshell -e component_name=mangodb" ]
+    "ansible-pull -i loclahost, -u https://github.com/raghudevopsb83/roboshop-ansible -e component_name=mangodb" ]
   }
 }
 

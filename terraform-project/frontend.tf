@@ -13,8 +13,8 @@ resource "aws_instance" "frontend" {
       password = "DevOps321"
       host = self.public_ip
     }
-    inline = [ "pip3 install ansible",
-    "ansible-pull -i loclahost, -u https://github.com/raghudevopsb83/roboshell -e component_name=frontend" ]
+    inline = [ "sudo pip3 install ansible", 
+    "ansible-pull -i loclahost, -U https://github.com/raghudevopsb83/roboshop-ansible -e component_name=frontend" ]
   }
 }
 
