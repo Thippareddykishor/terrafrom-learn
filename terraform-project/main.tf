@@ -1,48 +1,10 @@
-resource "aws_instance" "instance" {
-  //count = length(var.instances)
-  for_each = var.instances
-  instance_type = var.instance_type
-  ami = var.ami
-
-  vpc_security_group_ids = var.vpc_security_group_ids
-  tags = {
-    Name = each.key
-  }
-
-  # provisioner "remote-exec" {
-  #   connection {
-  #     type = "ssh"
-  #     user = "ec2-user"
-  #     password = "DevOps321"
-  #     host = self.public_ip
-  #   }
-  #   inline = [ "pip3 install ansible",
-  #   "ansible-pull -i loclahost, -u https://github.com/raghudevopsb83/roboshop-ansible -e component_name=catalogue -e env=dev" ]
-  # }
+module "ec2" {
+for_each = var.instances
+source = "./modules/ec2"
+ami_id = each.value["ami_id"]
+instance_type = each.value["instance_type"]
+name = each.key
+vpc_security_group_id = var.vpc_security_group_ids
+zone_id = var.zone_id
+env = var.env
 }
-
-resource "aws_route53_record" "catalogue_record" {
-  //count = length(var.instances)
-  for_each = var.instances
-  zone_id = var.zone_id
-  name = "${each.key}-${var.env}"
-  type = "A"
-  ttl=0
-  records = [aws_instance.instance[each.key].private_ip]
-}
-
-
-# resource "null_resource" "catalogue" {
-#   provisioner "remote-exec" {
-    
-  
-#   connection {
-#     type = "ssh"
-#     user = "ec2-user"
-#      password = "DevOps321"
-#     host = aws_instance.catalogue.public_ip
-#   }
-#   inline = [ "pip3 install ansible",
-#      "ansible-pull -i loclahost, -u https://github.com/raghudevopsb83/roboshop-ansible -e component_name=catalogue -e env=dev" ]
-#    }
-# }

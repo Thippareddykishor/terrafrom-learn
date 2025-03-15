@@ -1,3 +1,3 @@
 output "resource_count" {
-  value = var.input
+  value = length(var.input)
 }
