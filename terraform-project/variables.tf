@@ -11,9 +11,18 @@ variable "vpc_security_group_ids" {
 }
 
 variable "instances" {
-  default = [
-    "catalogue",
-    "frontend",
-    "mangodb"
-  ]
+  default = {
+    mangodb=null
+    frontend=null
+    catalogue=null
+    
+  }
+}
+
+variable "zone_id" {
+  default = "Z10310253KPZLFJOC7YEK"
+}
+
+variable "env" {
+  default = "dev"
 }
